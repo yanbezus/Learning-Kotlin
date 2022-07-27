@@ -1,0 +1,16 @@
+fun main() {
+    val child = Person("Child", "Child", 1)
+    val p1 = Person("Tom", "Jones", 35, child)
+    }
+//Primary Constructor
+class Person(val firstName: String, val lastName: String, var age: Int){
+    var children: MutableList<Person> = mutableListOf() //ArrayList
+
+    init {
+        println("Person is created: $firstName $lastName")
+    }
+    constructor(firstName: String, lastName: String, age: Int, child: Person):
+            this(firstName, lastName, age) {
+                children.add(child)
+            }
+}
