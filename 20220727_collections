@@ -1,0 +1,19 @@
+fun main() {
+val a = listOf(1, 2, 3, 4, 5)
+    a.forEach({a -> println(a)})
+    a.map ({e -> println(e * 2)})
+    println(a.filter { e -> e % 1 == 0 })
+    println (a.reduce {sum, e -> sum + e})
+    println (a.sum())
+
+    println(a.sortedByDescending { it })
+    println(a.any { it > 4 })
+    println(a.all { it > 4 })
+
+    val numbers = listOf(1, 3, -4, 2, -11)
+    val (positive, negative) = numbers.partition { it > 0 }
+    println(positive)
+    println(negative)
+    val result = listOf("a", "b", "ba", "ccc", "ad").groupBy { it.length }
+    println(result)
+}
