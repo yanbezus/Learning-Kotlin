@@ -1,0 +1,51 @@
+package com.example.semafor
+
+import android.app.Activity
+import android.os.Bundle
+import android.view.View
+import android.widget.ImageButton
+import android.widget.ImageView
+import java.util.*
+
+class MainActivity : Activity() {
+    var imSemafor: ImageView? = null //Для картинки со светофором.
+    var counter:Int = 0 //Будем перебирать ячейки из массива imageArray.
+    var timer:Timer? = null //Для таймера.
+    var is_run = false //Boolean для определения, работает ли таймер со светофором.
+    var imageArray:IntArray = intArrayOf(R.drawable.semafor_red, R.drawable.semafor_yellow, R.drawable.semafor_green) //Массив с картинками.
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        imSemafor = findViewById(R.id.imSemafor) //Привязываем переменную к id с экрана.
+
+    }
+    fun onClickStartStop(view: View){ //Функция - что делаем при нажатии кнопки. В скобках переменная view.
+//        imSemafor?.setImageResource(R.drawable.semafor_green) //меняем картинку на зеленый свет.
+        view as ImageButton //Переделываем просто view в кнопку.
+        if(!is_run){ //Если таймер со светофором не работает, то при нажатии кнопки..
+            startStop() //Запускаем функцию startStop
+            view.setImageResource(R.drawable.button_stop)
+            is_run = true //Меняем значение на true.
+        }
+        else { //Если таймер со светофором уже работает, то при нажатии кнопки..
+            imSemafor?.setImageResource(R.drawable.semafor_grey) //"Выключаем" светофор.
+            view.setImageResource(R.drawable.button_start) //Меняем кнопку в первоначальное состояние (Start).
+            timer?.cancel() //Останавливаем таймер, если он не равен null.
+            is_run = false
+            counter = 0
+        }
+    }
+    fun startStop() {
+        timer = Timer() //Создаем таймер.
+        timer?.schedule(object: TimerTask(){
+            override fun run() {
+                runOnUiThread {
+                    imSemafor?.setImageResource(imageArray[counter])
+                    counter++
+                    if (counter == 3) counter = 0
+                }
+            }
+        },0,1000)
+    }
+}
