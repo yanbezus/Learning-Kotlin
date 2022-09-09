@@ -36,7 +36,7 @@ class MainActivity : Activity() {
             counter = 0
         }
     }
-    fun startStop() {
+    fun startStop() { //Создаем функцию-таймер
         timer = Timer() //Создаем таймер.
         timer?.schedule(object: TimerTask(){
             override fun run() {
