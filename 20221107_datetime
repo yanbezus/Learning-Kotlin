@@ -1,0 +1,16 @@
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
+fun main(args: Array<String>) {
+    val formatter = DateTimeFormatter.ofPattern("dd LLLL")
+    val todayPattern = LocalDate.now()
+    val today = todayPattern.format(formatter)
+    val today1 = todayPattern.plusDays(1).format(formatter)
+    val today2 = todayPattern.plusDays(2).format(formatter)
+    val today3 = todayPattern.plusDays(3).format(formatter)
+    val today4 = todayPattern.plusDays(4).format(formatter)
+    val today5 = todayPattern.plusDays(5).format(formatter)
+    val today6 = todayPattern.plusDays(6).format(formatter)
+
+    println("$today, $today1, $today2, $today3, $today4, $today5, $today6")
+}
